@@ -1,4 +1,4 @@
-# 📱 MyExpoApp
+# 📱 Task:React-Native
 
 A modern mobile application built using **React Native** and **Expo Managed Workflow**. This project includes **unit testing**, **Integration testing** modular structure, and reusable components to ensure scalability and maintainability.
 
