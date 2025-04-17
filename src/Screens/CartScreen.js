@@ -2,9 +2,11 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useCart } from '../Contexts/CartContext';
 import CartItem from '../Components/CartItem';
+import { globalStyles } from '../Utils/globalStyles';
+import Color from '../Utils/colors';
 
 const CartScreen = ({ navigation }) => {
-  const { cartItems, getCartTotal } = useCart();
+  const { cartItems, setCartItems,  getCartTotal } = useCart();
   const total = getCartTotal();
 
   if (cartItems.length === 0) {
@@ -22,7 +24,7 @@ const CartScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={globalStyles.container}>
       <FlatList
         data={cartItems}
         renderItem={({ item }) => <CartItem item={item} />}
@@ -35,7 +37,9 @@ const CartScreen = ({ navigation }) => {
           <Text style={styles.totalText}>Total:</Text>
           <Text style={styles.totalAmount}>${total.toFixed(2)}</Text>
         </View>
-        <TouchableOpacity style={styles.checkoutButton}>
+        <TouchableOpacity style={styles.checkoutButton} onPress={() => {
+        setCartItems([])
+        }}>
           <Text style={styles.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>
       </View>
@@ -44,10 +48,6 @@ const CartScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f8f8',
-  },
   list: {
     paddingVertical: 12,
     paddingBottom: 100,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   checkoutButton: {
-    backgroundColor: '#4A80F0',
+    backgroundColor: Color.btnColor,
     borderRadius: 10,
     padding: 16,
     alignItems: 'center',
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   continueButton: {
-    backgroundColor: '#4A80F0',
+    backgroundColor: Color.btnColor,
     borderRadius: 10,
     padding: 16,
     alignItems: 'center',

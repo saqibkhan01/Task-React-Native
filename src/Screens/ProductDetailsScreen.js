@@ -1,19 +1,34 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useCart } from '../Contexts/CartContext';
+import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { useCart } from "../Contexts/CartContext";
+import { globalStyles } from "../Utils/globalStyles";
+import Color from "../Utils/colors";
 
 const ProductDetailsScreen = ({ route }) => {
   const { product } = route.params;
   const { addToCart } = useCart();
 
   return (
-    <ScrollView style={styles.container}>
-      <Image source={{ uri: product.image }} style={styles.image} />
+    <ScrollView style={globalStyles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          testID="product-image"
+          source={{ uri: product.image }}
+          style={styles.image}
+        />
+      </View>
       <View style={styles.infoContainer}>
         <Text style={styles.name}>{product.name}</Text>
         <Text style={styles.price}>${product.price.toFixed(2)}</Text>
         <Text style={styles.description}>{product.description}</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.button}
           onPress={() => addToCart(product)}
         >
@@ -25,44 +40,44 @@ const ProductDetailsScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  imageContainer: {
+    width: "100%",
+    backgroundColor: Color.whiteColor,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 300,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   infoContainer: {
     padding: 20,
   },
   name: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 8,
   },
   price: {
     fontSize: 18,
-    color: '#666',
+    color: "#666",
     marginBottom: 16,
   },
   description: {
     fontSize: 16,
     lineHeight: 24,
-    color: '#444',
+    color: "#444",
     marginBottom: 24,
   },
   button: {
-    backgroundColor: '#4A80F0',
+    backgroundColor: Color.btnColor,
     borderRadius: 10,
     padding: 16,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
 
